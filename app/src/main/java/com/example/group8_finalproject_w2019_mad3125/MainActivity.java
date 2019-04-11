@@ -23,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private  EditText epass;
     private Button btnlogin;
 
-    //  private TextView txtmsg;
-    //  private Button btncancel;
+
     String email;
     String pass;
     String lblerror;
@@ -62,30 +61,45 @@ public class MainActivity extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email=eduid.getText().toString();
-                pass=epass.getText().toString();
+                //  email=eduid.getText().toString();
+                //  pass=epass.getText().toString();
 
-                if(email.equals("j") && pass.equals("123") )
-                {
-                    lblerror="Login sucess";
+                /*if (email.equals("j") && pass.equals("123")) {
+                    lblerror = "Login sucess";
                     //navigate with intenet
-                   // Intent mIntent=new Intent(MainActivity.this,MainMenu.class);
-                   // mIntent.putExtra("name","jagmeet");
+                    // Intent mIntent=new Intent(MainActivity.this,MainMenu.class);
+                    // mIntent.putExtra("name","jagmeet");
                     //startActivity(mIntent);
 
 
-                    Toast.makeText(MainActivity.this,email,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, email, Toast.LENGTH_SHORT).show();
 
+}
+*/
+                    if (eduid.getText().length() != 0 && epass.getText().length() != 0) {
+                        String name = eduid.getText().toString();
+                        String password = epass.getText().toString();
+
+                        SharedPreferences.Editor mEditor = sharedPreferences.edit();
+
+                        mEditor.putString("name", name);
+
+                        //mEditor.remove("name");
+                        //mEditor.clear();
+
+                        mEditor.apply();
+                        //mEditor.commit();
+
+                        Intent mIntent = new Intent(MainActivity.this, Signup.class);
+                        startActivity(mIntent);
+                    } else {
+
+                        showDialog();
+
+                    }
 
                 }
-                else
-                {
 
-                    showDialog();
-
-                }
-
-            }
         });
 
 
