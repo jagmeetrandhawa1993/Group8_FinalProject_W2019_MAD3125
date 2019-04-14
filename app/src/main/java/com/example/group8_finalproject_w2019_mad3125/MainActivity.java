@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText eduid;
     private  EditText epass;
     private Button btnlogin;
+    private Button btnSignup;
 
 
     String email;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         eduid=findViewById(R.id.txtlogin);
         epass=findViewById(R.id.txtpass);
         btnlogin=findViewById(R.id.btnlogin);
+        btnSignup = findViewById(R.id.btnSignup);
 
 
 
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                         mEditor.apply();
                         //mEditor.commit();
 
-                        Intent mIntent = new Intent(MainActivity.this, Signup.class);
+                        Intent mIntent = new Intent(MainActivity.this, MainMenu.class);
                         startActivity(mIntent);
                     } else {
 
@@ -100,6 +102,15 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
+        });
+
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mIntent = new Intent(MainActivity.this,Signup.class);
+                startActivity(mIntent);
+            }
         });
 
 

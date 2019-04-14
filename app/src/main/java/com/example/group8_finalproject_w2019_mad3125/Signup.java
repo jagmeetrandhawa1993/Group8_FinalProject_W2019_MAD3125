@@ -11,6 +11,9 @@ import android.widget.EditText;
 import com.example.group8_finalproject_w2019_mad3125.Modal.Users;
 import com.example.group8_finalproject_w2019_mad3125.Utils.JsonUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -56,7 +59,21 @@ private  EditText editTextid;
         address=editTextaddress.getText().toString();
 
 
-       ;
+
+
+            JSONObject object = new JSONObject();
+            try {
+                object.put("name", "Jack Hack");
+                object.put("id", "k@k.com");
+                object.put("password", "123");
+                object.put("address", "Punjab");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            System.out.println(object);
+
+
+
     }
 });
 
@@ -66,7 +83,7 @@ private  EditText editTextid;
 
     }
 
-    public void writeJsonStream(OutputStream out, List<Message> messages) throws IOException {
+  /*  public void writeJsonStream(OutputStream out, List<Message> messages) throws IOException {
         JsonWriter writer = new JsonWriter(new OutputStreamWriter(out, "UTF-8"));
         writer.setIndent("  ");
         writeMessagesArray(writer, messages);
@@ -95,7 +112,7 @@ private  EditText editTextid;
 
 
 
-    public void writeDoublesArray(JsonWriter writer, List<Double> doubles) throws IOException {
+   public void writeDoublesArray(JsonWriter writer, List<Double> doubles) throws IOException {
         writer.beginArray();
         for (Double value : doubles) {
             writer.value(value);
@@ -103,5 +120,5 @@ private  EditText editTextid;
         writer.endArray();
     }
 
-
+*/
 }
