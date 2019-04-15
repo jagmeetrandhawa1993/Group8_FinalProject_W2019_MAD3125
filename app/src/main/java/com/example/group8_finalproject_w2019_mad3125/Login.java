@@ -10,11 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getCanonicalName() ;
+    private static final String TAG = Login.class.getCanonicalName() ;
     private SharedPreferences sharedPreferences;
 
 
@@ -24,10 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnlogin;
     private Button btnSignup;
 
-
-    String email;
-    String pass;
-    String lblerror;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,38 +58,19 @@ public class MainActivity extends AppCompatActivity {
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  email=eduid.getText().toString();
-                //  pass=epass.getText().toString();
 
-                /*if (email.equals("j") && pass.equals("123")) {
-                    lblerror = "Login sucess";
-                    //navigate with intenet
-                    // Intent mIntent=new Intent(MainActivity.this,MainMenu.class);
-                    // mIntent.putExtra("name","jagmeet");
-                    //startActivity(mIntent);
-
-
-                    Toast.makeText(MainActivity.this, email, Toast.LENGTH_SHORT).show();
-
-}
-*/
-                    if (eduid.getText().length() != 0 && epass.getText().length() != 0) {
+                    if (eduid.getText().length() != 0 && epass.getText().length() != 0)
+                    {
                         String name = eduid.getText().toString();
                         String password = epass.getText().toString();
-
                         SharedPreferences.Editor mEditor = sharedPreferences.edit();
-
                         mEditor.putString("name", name);
-
-                        //mEditor.remove("name");
-                        //mEditor.clear();
-
                         mEditor.apply();
-                        //mEditor.commit();
-
-                        Intent mIntent = new Intent(MainActivity.this, MainMenu.class);
+                        Intent mIntent = new Intent(Login.this, MainMenu.class);
                         startActivity(mIntent);
-                    } else {
+                    }
+                    else
+                        {
 
                         showDialog();
 
@@ -108,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mIntent = new Intent(MainActivity.this,Signup.class);
+                Intent mIntent = new Intent(Login.this,Signup.class);
                 startActivity(mIntent);
             }
         });
@@ -126,33 +102,15 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 this);
 
-        // set title
         alertDialogBuilder.setTitle("Enter valid Id and Password");
-
-        // set dialog message
         alertDialogBuilder
-                .setMessage("Click yes to exit!")
-                .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+
+                .setNegativeButton("OK",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, close
-                        // current activity
-                        MainActivity.this.finish();
-                    }
-                })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
                         dialog.cancel();
                     }
                 });
-
-
-        // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
         alertDialog.show();
 
     }
