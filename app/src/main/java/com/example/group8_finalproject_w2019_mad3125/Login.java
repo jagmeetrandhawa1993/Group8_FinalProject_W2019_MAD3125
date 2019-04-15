@@ -11,72 +11,45 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.group8_finalproject_w2019_mad3125.Modal.Customer;
+
 public class Login extends AppCompatActivity {
-
-    private static final String TAG = Login.class.getCanonicalName() ;
-    private SharedPreferences sharedPreferences;
-
-
-
+    Customer cs = new Customer();
     private EditText eduid;
-    private  EditText epass;
+    private EditText epass;
     private Button btnlogin;
     private Button btnSignup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        eduid=findViewById(R.id.txtlogin);
-        epass=findViewById(R.id.txtpass);
-        btnlogin=findViewById(R.id.btnlogin);
+        eduid = findViewById(R.id.txtlogin);
+        epass = findViewById(R.id.txtpass);
+        btnlogin = findViewById(R.id.btnlogin);
         btnSignup = findViewById(R.id.btnSignup);
-
-
-
-        sharedPreferences = getSharedPreferences("myPref",MODE_PRIVATE);
-
-        if (sharedPreferences.contains("name"))
-        {
-            String name = sharedPreferences.getString("name", null);
-
-            if (name != null)
-            {
-                Log.d(TAG, name);
-                Log.i(TAG, name);
-                Log.v(TAG, name);
-                Log.w(TAG, name);
-                Log.e(TAG, name);
-
-                eduid.setText(name);
-
-            }
-        }
+        Customer c1 = new Customer(11, "Gurminder", "Kaur", "123", "toronto", "gur@gmail.com", "etobicoke", 123456);
+        cs.register(c1);
 
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                    if (eduid.getText().length() != 0 && epass.getText().length() != 0)
-                    {
-                        String name = eduid.getText().toString();
-                        String password = epass.getText().toString();
-                        SharedPreferences.Editor mEditor = sharedPreferences.edit();
-                        mEditor.putString("name", name);
-                        mEditor.apply();
-                        Intent mIntent = new Intent(Login.this, MainMenu.class);
-                        startActivity(mIntent);
-                    }
-                    else
-                        {
+                String email = eduid.getText().toString();
+                String password = epass.getText().toString();
+                boolean check = cs.checklogin(email, password);
+                if (check == true) {
+                    Intent LoginIntent = new Intent(Login.this, MainMenu.class);
+                    startActivity(LoginIntent);
+                } else {
 
-                        showDialog();
-
-                    }
+                    showDialog();
 
                 }
+
+            }
 
         });
 
@@ -84,20 +57,16 @@ public class Login extends AppCompatActivity {
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mIntent = new Intent(Login.this,Signup.class);
+                Intent mIntent = new Intent(Login.this, Signup.class);
                 startActivity(mIntent);
             }
         });
 
 
-
-
     }
 
 
-
-    private void showDialog()
-    {
+    private void showDialog() {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 this);
@@ -105,8 +74,8 @@ public class Login extends AppCompatActivity {
         alertDialogBuilder.setTitle("Enter valid Id and Password");
         alertDialogBuilder
 
-                .setNegativeButton("OK",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 });
@@ -114,7 +83,9 @@ public class Login extends AppCompatActivity {
         alertDialog.show();
 
     }
-
-
-
 }
+
+
+
+
+
